@@ -1,0 +1,11 @@
+Disease,Itchiness,Redness,Burning,Pain,Swelling,Scaling,Blisters,Open Wounds / Pus,White Patches,Lumps or Growths,Dark Spots / Pigmentation,Dry Skin,label
+Eczema,1,1,0,0,0,1,0,0,0,0,0,1,0
+Atopic Dermatitis,1,1,0,0,1,0,0,0,0,0,0,1,2
+Psoriasis,0,1,0,0,0,1,0,0,1,0,0,0,6
+Fungal Infection,1,1,0,0,0,0,1,0,1,0,0,0,8
+Melanoma,1,0,0,0,0,0,0,0,0,1,1,0,1
+Basal Cell Carcinoma,0,0,0,0,0,0,0,1,0,1,0,0,3
+Benign Tumors,0,0,0,0,0,0,0,0,0,1,0,0,5
+Warts / Molluscum,0,0,0,0,0,1,0,0,0,1,0,0,9
+Seborrheic Keratosis,0,0,0,0,0,1,0,0,0,0,1,0,7
+Melanocytic Nevi,0,0,0,0,0,0,0,0,0,1,1,0,4

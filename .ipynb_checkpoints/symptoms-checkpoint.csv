@@ -1,0 +1,31 @@
+Disease,label,Itching,Redness,Dry Skin,Swelling,Blisters,Pain,Scaling,Burning,Pus,White Patches,Face,Scalp,Hands,Feet
+Eczema,0,1,1,1,0,0,0,1,0,0,0,1,0,1,0
+Eczema,0,1,0,1,0,0,0,1,1,0,0,1,0,1,0
+Eczema,0,1,1,1,0,0,0,0,0,0,0,1,0,1,0
+"Warts, Molluscum, and Other Viral Infections",9,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+"Warts, Molluscum, and Other Viral Infections",9,0,0,0,0,1,1,0,0,0,0,0,0,0,1
+"Warts, Molluscum, and Other Viral Infections",9,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+Melanoma,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0
+Melanoma,1,0,1,0,1,0,1,0,0,0,0,1,0,0,0
+Melanoma,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0
+Atopic Dermatitis,2,1,1,1,0,0,0,1,0,0,0,1,0,1,0
+Atopic Dermatitis,2,1,1,1,0,0,0,1,1,0,0,1,0,1,0
+Atopic Dermatitis,2,1,1,1,0,0,0,0,0,0,0,1,0,1,0
+Basal Cell Carcinoma,3,0,1,0,1,0,1,0,1,0,0,1,0,0,0
+Basal Cell Carcinoma,3,0,1,0,1,0,1,0,0,0,0,1,0,0,0
+Basal Cell Carcinoma,3,0,1,0,1,0,1,0,1,0,0,1,0,0,0
+Melanocytic Nevi,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Melanocytic Nevi,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Melanocytic Nevi,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Benign Keratosis-like Lesions,5,0,0,1,0,0,0,1,0,0,0,0,1,0,0
+Benign Keratosis-like Lesions,5,0,0,1,0,0,0,1,1,0,0,0,1,0,0
+Benign Keratosis-like Lesions,5,0,0,1,0,0,0,0,0,0,0,0,1,0,0
+Seborrheic Keratosis and Other Benign Tumors,7,0,0,1,0,0,0,1,0,0,0,0,1,0,0
+Seborrheic Keratosis and Other Benign Tumors,7,0,0,1,0,0,0,1,1,0,0,0,1,0,0
+Seborrheic Keratosis and Other Benign Tumors,7,0,0,1,0,0,0,0,0,0,0,0,1,0,0
+"Tinea, Ringworm, Candidiasis, and Other Fungal Infections",8,1,1,1,0,0,0,1,0,0,1,0,0,1,1
+"Tinea, Ringworm, Candidiasis, and Other Fungal Infections",8,1,1,1,0,0,0,1,1,0,1,0,0,1,1
+"Tinea, Ringworm, Candidiasis, and Other Fungal Infections",8,1,1,1,0,0,0,0,0,0,1,0,0,1,1
+"Psoriasis, Lichen Planus, and Other Related Diseases",6,1,1,1,0,0,0,1,0,0,0,1,0,1,0
+"Psoriasis, Lichen Planus, and Other Related Diseases",6,1,1,1,0,0,0,1,1,0,0,1,0,1,0
+"Psoriasis, Lichen Planus, and Other Related Diseases",6,1,1,1,0,0,0,0,0,0,0,1,0,1,0

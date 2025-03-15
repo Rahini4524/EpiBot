@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="" >
-    <title>upload image</title>
+    <title>EpiBot</title>
+    <link rel="shortcut icon" href="../assets/DODO-Full.png" type="image/x-icon">
     <link rel="stylesheet" href="upload.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
 <body>
@@ -28,35 +27,38 @@
                 </div>
             </div>
         </div>
-        
         <div id="imageModal" class="modal">
             <div class="modal-content">
                 <button id="closeModal" class="close">&times;</button>
-                <button class="action-btn">
+                <button class="action-btn" id="take-photo">
                     <i class='bx bxs-camera camera-icon'></i>
                     TAKE
                 </button>
-                <button class="action-btn">
+                <button class="action-btn" id="upload-btn">
                     <i class='bx bx-upload upload'></i>
                     UPLOAD
                 </button>
+                <!-- Hidden File Input -->
+                <input type="file" id="image_input" accept="image" hidden>
+                <!-- <div id="display-image"></div> -->
             </div>
         </div>        
         <div class="footer">
             <div class="down">
+                <!-- <div id="display-image"></div> -->
                 <button class="camera" id="camera">
                     <i class='bx bxs-camera-plus upload-icon'></i>
                 </button>
-                <input class="text-box" id="input"  type="text" placeholder="Ask Anything...">
+                <input class="text-box" id="input" type="text" placeholder="Ask Anything...">
                 <button class="send" id="send">
                     <img class="start-icon" src="../assets/send.png" alt="start-icon">
                 </button>
             </div>
         </div>
         <div>
-            <input type="file" id="image_input" accept="image/png, image/jpg">
-            <div class="display-image" id="display-image"></div>
-        </div>
+        <!-- <input type="file" id="image_input" accept="image/png, image/jpg"> -->
+       
+    </div>
     </div>
     
     <script src="upload.js"></script>

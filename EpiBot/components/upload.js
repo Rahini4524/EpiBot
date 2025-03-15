@@ -1,115 +1,70 @@
-function displayUserMessage(message){
-  let chat = document.getElementById('chat')
-
-  let usermessage = document.createElement('div')
-  usermessage.classList.add('message')
-  usermessage.classList.add('user')
-
-  let userAvatar = document.createElement("div");
-  userAvatar.classList.add("avatar");
-
-  let userText = document.createElement("div");
-  userText.classList.add("text");
-  userText.innerHTML = message;
-
-  usermessage.appendChild(userAvatar);
-  usermessage.appendChild(userText);
-  chat.appendChild(usermessage);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function displayBotMessage(message) {
-let chat = document.getElementById("chat");
-
-let botMessage = document.createElement("div");
-botMessage.classList.add("message");
-botMessage.classList.add("bot");
-
-let botAvatar = document.createElement("div");
-botAvatar.classList.add("avatar");
-
-let botText = document.createElement("div");
-botText.classList.add("text");
-botText.innerHTML = message;
-
-botMessage.appendChild(botAvatar);
-botMessage.appendChild(botText);
-chat.appendChild(botMessage);
-chat.scrollTop = chat.scrollHeight;
-}
-
-
-// document.getElementById("send").addEventListener("click", sendMessage);
-
-
-// Get modal elements
-const modal = document.getElementById("imageModal");
-const cameraButton = document.getElementById("camera");
-const closeModal = document.getElementById("closeModal");
-
-// Open modal
-cameraButton.addEventListener("click", function () {
-  modal.style.display = "flex";
-  document.body.classList.add("modal-open"); // Apply blur effect
-});
-
-// Close modal
-closeModal.addEventListener("click", function () {
-  modal.style.display = "none";
-  document.body.classList.remove("modal-open"); // Remove blur effect
-});
-
-// Close modal when clicking outside content
-window.addEventListener("click", function (event) {
-  if (event.target === modal) {
-      modal.style.display = "none";
-      document.body.classList.remove("modal-open");
-  }
-});
-
-function typeEffect(element, text, speed = 50) {
-let i = 0;
-element.innerHTML = ""; // Clear previous text before typing
-
-function type() {
-    if (i < text.length) {
-        element.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-    }
-}
-
-type();
-}
-
-// Call function when the page loads
-document.addEventListener("DOMContentLoaded", function () {
-const botTextElement = document.getElementById("bot-text"); // Make sure your bot message has this ID
-const message = `Welcome to SkinCare AI! 🌿✨ I'm here to help you analyze your skin condition and provide insights about potential allergies or issues. Simply upload an image and answer a few questions, and I'll guide you toward understanding your skin better. Let's get started! 😊`;
-
-typeEffect(botTextElement, message, 30); // Adjust speed as needed
-});
-
-// const image_input = document.querySelector("#image_input");
-// var uploaded_image=" ";
-// image_input.addEventListener("change", function(){
-//     const reader = new FileReader();
-//     reader.addEventListener("load", ()=>{
-//         uploaded_image = reader.result;
-//         document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`
-//     });
-//     reader.readAsDataURL(this.files[0])
-// })
-
 // -------------- BACKENT INTEGRATION -----------------
 
 
 const INPUT = document.getElementById("input")
 const SEND = document.getElementById("send");
 
+
+SEND.addEventListener("click", ()=>{
+  sendMessage(INPUT.value);
+  displayUserMessage(INPUT.value);
+  INPUT.value = "";
+})
+  
+
+function displayUserMessage(message, isImage = false) {
+  let chat = document.getElementById("chat");
+
+  let userMessage = document.createElement("div");
+  userMessage.classList.add("message", "user");
+
+  let userAvatar = document.createElement("div");
+  userAvatar.classList.add("avatar");
+
+  let userContent = document.createElement("div");
+  userContent.classList.add("text");
+
+  if (isImage) {
+      let img = document.createElement("img");
+      img.src = message;
+      img.style.maxWidth = "150px";
+      img.style.borderRadius = "10px";
+      img.style.display = "block";
+      userContent.appendChild(img);
+  } else {
+      userContent.innerText = message;
+  }
+
+  userMessage.appendChild(userAvatar);
+  userMessage.appendChild(userContent);
+  chat.appendChild(userMessage);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function displayBotMessage(message) {
+  let chat = document.getElementById("chat");
+
+  let botMessage = document.createElement("div");
+  botMessage.classList.add("message", "bot");
+
+  let botAvatar = document.createElement("div");
+  botAvatar.classList.add("avatar");
+
+  let botContent = document.createElement("div");
+  botContent.classList.add("text");
+  botContent.innerText = message;
+
+  botMessage.appendChild(botAvatar);
+  botMessage.appendChild(botContent);
+  chat.appendChild(botMessage);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// Handle text message sending
+
 const sendMessage = async (user_input)=>{
   try {
-      const response = await fetch("http://localhost:5000/send-message", {
+      const response = await fetch("/send-message", {
           method:"POST",
           headers:{
               "Content-Type":"application/json"
@@ -123,14 +78,99 @@ const sendMessage = async (user_input)=>{
       displayBotMessage(res.response);
       
   } catch (error) {
+    console.log(error);
       alert("Something went wrong!")
   }
 }
+document.getElementById("input").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+      event.preventDefault(); // Prevents line break in the input field
+      sendMessage(INPUT.value);
+      displayUserMessage(INPUT.value);
+      INPUT.value = "";
+      
+  }
+});
 
-SEND.addEventListener("click", ()=>{
-  sendMessage(INPUT.value);
-  
-  displayUserMessage(INPUT.value);
-  INPUT.value = "";
-})
+
+// Image Upload Handling
+const modal = document.getElementById("imageModal");
+const cameraButton = document.getElementById("camera");
+const closeModal = document.getElementById("closeModal");
+const uploadBtn = document.getElementById("upload-btn");
+const imageInput = document.getElementById("image_input");
+
+// Open modal when clicking the camera button
+cameraButton.addEventListener("click", function () {
+  modal.style.display = "flex";
+  document.body.classList.add("modal-open");
+});
+
+// Close modal when clicking 'X' button
+closeModal.addEventListener("click", function () {
+  modal.style.display = "none";
+  document.body.classList.remove("modal-open");
+});
+
+// Close modal when clicking outside content
+window.addEventListener("click", function (event) {
+  if (event.target === modal) {
+      modal.style.display = "none";
+      document.body.classList.remove("modal-open");
+  }
+});
+
+// Open file selector when clicking upload button
+uploadBtn.addEventListener("click", function () {
+  imageInput.click();
+});
+
+// Handle image upload
+imageInput.addEventListener("change", function () {
+  const file = this.files[0];
+
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+          modal.style.display = "none";
+          document.body.classList.remove("modal-open");
+
+          // Display user-uploaded image
+          displayUserMessage(e.target.result, true);
+
+          // Bot response after 1 second
+          setTimeout(() => {
+              displayBotMessage("I see you've uploaded an image! Let me analyze it...");
+          }, 1000);
+      };
+      reader.readAsDataURL(file);
+  }
+});
+
+// Simulated bot typing effect
+function typeEffect(element, text, speed = 50) {
+  let i = 0;
+  element.innerHTML = "";
+
+  function type() {
+      if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+      }
+  }
+
+  type();
+}
+
+// Initialize bot welcome message on page load
+document.addEventListener("DOMContentLoaded", function () {
+  const botTextElement = document.getElementById("bot-text");
+  const message = `Welcome to Epibot! 🤖 Upload an image and I'll analyze it. Let's get started!`;
+  typeEffect(botTextElement, message, 30);
+
+});
+
+
+
 

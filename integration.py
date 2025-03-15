@@ -216,15 +216,30 @@ def webhook():
         possible_diseases = get_possible_diseases(user_symptoms)
         print(" Possible Diseases:", possible_diseases)  # Debugging
 
-        # Find the most relevant next symptom
-        next_symptom = get_most_relevant_symptom(possible_diseases, user_symptoms, user_rejected_symptoms)
-        print(" Next Symptom to ask:", next_symptom)  # Debugging
+        if len(possible_diseases) == 1:
+            final_disease = possible_diseases[0]
+            
+            # Generate binary symptom vector
+            symptom_vector = convert_disease_to_binary(final_disease, symptoms_order, disease_symptom_map)
+            print(" Binary Symptom Vector:", symptom_vector)  # Debugging
 
-        if next_symptom:
-            awaiting_symptom = next_symptom.lower()
-            response_text = f"You may have {', '.join(possible_diseases)}. Do you also have {next_symptom}?"
+            input_vector = np.concatenate([image_features, symptom_vector])
+            final_prediction = predict_disease(input_vector)
+            predicted_disease = class_names[final_prediction]
+
+            print(f" Final Prediction: {predicted_disease}")  # Debugging
+            response_text = (
+                f"Based on your symptoms, the most likely diagnosis is **{predicted_disease}**.\n\n"
+                f"{recommendations.get(predicted_disease, 'Please consult a doctor for further diagnosis.')}"
+            )
         else:
-            response_text = f"You may have {', '.join(possible_diseases)}. Please consult a doctor for further diagnosis."
+            # Find the next most relevant symptom
+            next_symptom = get_most_relevant_symptom(possible_diseases, user_symptoms, user_rejected_symptoms)
+            if next_symptom:
+                awaiting_symptom = next_symptom.lower()
+                response_text = f"You may have {', '.join(possible_diseases)}. Do you also have {next_symptom}?"
+            else:
+                response_text = f"You may have {', '.join(possible_diseases)}. Please consult a doctor for further diagnosis."
 
         return jsonify({"fulfillmentText": response_text})
 
@@ -281,15 +296,11 @@ def webhook():
 
             predicted_disease = class_names[final_prediction]
             
-
-
-
             print(f" Final Prediction: {class_names[final_prediction]}")  # Debugging
             response_text = (
-        f"Based on your symptoms, the most likely diagnosis is **{predicted_disease}**.\n\n {recommendations[class_names[final_prediction]]}"
-        
-    )
-    
+                f"Based on your symptoms, the most likely diagnosis is **{predicted_disease}**.\n\n "
+                f"{recommendations[class_names[final_prediction]]}"
+            )
             awaiting_symptom = None
         else:
             # Ask about the next most relevant symptom
@@ -305,7 +316,7 @@ def webhook():
 
     return jsonify({"fulfillmentText": "I didn't understand that request."})
 
-SERVICE_ACCOUNT_FILE = r"restaurantbot-djjy-97a3e864400a.json"
+SERVICE_ACCOUNT_FILE = r"secure.json"
 
 with open(SERVICE_ACCOUNT_FILE) as f:
     creds = json.load(f)

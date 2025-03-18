@@ -125,25 +125,41 @@ uploadBtn.addEventListener("click", function () {
   imageInput.click();
 });
 
-// Handle image upload
 imageInput.addEventListener("change", function () {
   const file = this.files[0];
 
   if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      // Display a local preview instantly
+      const localURL = URL.createObjectURL(file);
+      displayUserMessage(localURL, true);
+
+      // Send image to the backend
+      fetch("http://127.0.0.1:5000/upload", {
+          method: "POST",
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
           modal.style.display = "none";
           document.body.classList.remove("modal-open");
 
-          // Display user-uploaded image
-          displayUserMessage(e.target.result, true);
+          // Replace local preview with backend URL
+          const chatMessages = document.querySelectorAll(".message.user img");
+          const lastImage = chatMessages[chatMessages.length - 1];
+          lastImage.src = data.url; // Update image source with server URL
 
-          // Bot response after 1 second
+          // Bot response
           setTimeout(() => {
-              displayBotMessage("I see you've uploaded an image! Let me analyze it...");
+              displayBotMessage("Image uploaded successfully! Here's the link: " + data.url);
           }, 1000);
-      };
-      reader.readAsDataURL(file);
+      })
+      .catch(error => {
+          console.error("Error uploading image:", error);
+          displayBotMessage("Failed to upload image.");
+      });
   }
 });
 

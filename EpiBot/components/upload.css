@@ -1,224 +1,157 @@
-*{
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    font-family: "inter",sans-serif;
-    text-decoration: none;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
 :root {
-    --bg-color:#FFF2F2;
-    --main-color: #2D336B;
-    --text-color: #7886C7;
-    --sectext-color: #A9B5DF;
+  --bg-color: #F8F9FC;
+  --main-color: #2D336B;
+  --text-color: #5C6BC0;
+  --sectext-color: #A9B5DF;
+  --white: #fff;
+  --shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    background: var(--bg-color);
+  background: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 10px;
 }
 
-.nav{
-    display: flex; 
-    height: 65px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color:var(--bg-color);
-    z-index: 100;
+.container {
+  width: 100%;
+  max-width: 450px;
+  height: 90vh;
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.menu{
-    margin:10px 0 0 10px;
-    width:100px;
-    height: 100px;
-    font-size: 50px;
-    color: var(--main-color);
-}
-
-.title{
-    margin: 10px 0 0 -20px;
-    font-weight: bold;
-    font-size: 40px;
-    color: var(--main-color);
-} 
-
-.bot-profile{
-    margin: 150px 0 0 200px;
-}
-
-.down{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    border-radius: 28px;
-    background:var(--text-color);
-    bottom: 10px;
-    position: fixed;
-    width: 500px;
-    transition: background 0.25s;
-}
-
-.down:focus-within{
-    background: var(--sectext-color);
-}
-
-.chat-box {
-    background-color: #7886C7;
-    width: auto;
-    height: auto;
-}
-
-.upload-icon{
-    font-size: xx-large;
-}
-
-.text-box{
-    font-size: 16px;
-    color: #2D336B;
-    margin-left: 10px;
-    outline: none;
-    border: none;
-    background: transparent;
-    
-}
-
-.text-box::-ms-clear,
-.text-box::-ms-reveal,
-.text-box::-webkit-search-cancel-button {
-    display: none;
-    appearance: none;
-}
-
-.text-box::placeholder,
-.upload-icon,
-.start-icon{
-    color: #2D336B;
-}
-
-.chat-box {
-        height: 97vh;
-        margin-top: 75px;
-        background-color:var(--bg-color);
-}
-
-.send {
-    border: none;
-    background: transparent;
-    position: relative;
-    right: 4px;
-    padding: 20px;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.camera{
-  border: none;
-  background:transparent;
-  position: relative;
-  left: 4px;
-  padding: 20px;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
+/* Navigation Bar */
+.nav {
   display: flex;
   align-items: center;
+  padding: 15px;
+  background: var(--main-color);
+  color: var(--white);
+  font-size: 20px;
+  font-weight: bold;
   justify-content: center;
+}
+
+/* Chat Box */
+.chat-box {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: var(--bg-color);
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+.bot .text, .user .text {
+  padding: 12px;
+  border-radius: 15px;
+  max-width: 75%;
+  font-size: 14px;
+  word-wrap: break-word;
+  box-shadow: var(--shadow);
+}
+
+.user .text {
+  background: var(--text-color);
+  color: var(--white);
+  border-radius: 15px 15px 0 15px;
+  align-self: flex-end;
+}
+
+.user {
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+
+
+.bot .text {
+  background: var(--white);
+  border-radius: 15px 15px 15px 0;
+  color: var(--main-color);
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Footer Input */
+.footer {
+  background: var(--white);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #E0E4F1;
+}
+
+.text-box {
+  width: auto;
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  background: #E8EBF7;
+  outline: none;
+  margin: 0 20px;
+}
+.down {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.camera, .send {
+  background: var(--text-color);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  color: var(--white);
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.chat {
-    height: 85vh;
-    overflow-y: scroll;
-    padding: 10px;
-    border-radius: 5px;
-    background:var(--bg-color);
+.camera:hover, .send:hover {
+  background: var(--main-color);
+}
 
-  }
-  
-  .message {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    align-items: flex-end;
-  }
-  
-  .user {
-    justify-content: flex-end;
-  }
-  
-  .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 0 10px;
-  }
-  
-  .user .avatar {
-    order: 2;
-    background: url("../assets/user.png");
-    background-size: cover;
-  }
-  
-  .bot .avatar {
-    order: 0;
-    background: url("../assets/bot-profile.png");
-    background-size: cover;
-   
-  }
-  
-  .text {
-    max-width: 70%;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: 800;
-    color:var(--main-color);
-  }
-
-  .typing-text {
-    font-size: 16px;
-    font-weight: bold;
-    color: #2D336B;
-    white-space: pre-wrap;
-    overflow: hidden;
+.start-icon{
+  width: 15px;
+  height: 10px;
+  filter: brightness(0) invert(1);
+}
+.upload-icon{
+  width: 15px;
+  height: 10px;
 }
 
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
 
-@keyframes blink {
-    50% { border-color: transparent; }
-}
 
-  
-  .user .text {
-    background: linear-gradient(to bottom, #C4D9FF, #C5BAFF);
-    border-radius: 10px 10px 0 10px;
-  }
-  
-  .bot .text {
-    background: linear-gradient(to bottom, #C4D9FF, #C5BAFF);
-    border-radius: 10px 10px 10px 0;
-  }
-
-  .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Modal Styles */
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -226,74 +159,58 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0); 
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background: var(--bg-color);
-  padding: 50px;
+  background: var(--white);
+  padding: 25px;
   border-radius: 15px;
   text-align: center;
-  width: 100%;
-  gap: 20px;
-  max-width: 300px;
-  display: flex;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  box-shadow: var(--shadow);
 }
 
 .action-btn {
-  background: var(--sectext-color);
-  color:var(--main-color);
-  padding: 20px;
-  width: 200px;  
-  height: 100px;
-  margin: 50px 0;
-  border: none;
-  border-radius: 20px;
+  background: var(--text-color);
+  color: var(--white);
+  padding: 12px;
+  border-radius: 10px;
   font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: 10px;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  display: block;
+  width: 100%;
+  transition: 0.3s;
 }
 
 .action-btn:hover {
-  background: var(--sectext-color);
-  transform: scale(1.1);
-  box-shadow: 0 0 20px var(--text-color);
+  background: var(--main-color);
 }
 
 .close {
-  background: none;
-  border: none;
-  font-size: 30px;
-  float: right;
-  cursor: pointer;
+  font-size: 24px;
   color: var(--main-color);
-  display: flex;
-  flex-direction: column;
-  margin:-40px 0 0 -30px ;
+  border: none;
+  background: none;
+  cursor: pointer;
+  float: right;
 }
 
-body.modal-open {
-  overflow: hidden;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+  }
 }
 
-.camera-icon{
-  font-size: xx-large;
+@media (min-width: 1024px) {
+  .container {
+      max-width: 600px;
+  }
 }
-
-.upload{
-  font-size: xx-large;
-}
-
-#display-image{
-  background-size: cover;
-  background-position: center;
-} 

@@ -11,7 +11,6 @@ SEND.addEventListener("click", ()=>{
   INPUT.value = "";
 })
   
-
 function displayUserMessage(message, isImage = false) {
   let chat = document.getElementById("chat");
 
@@ -27,16 +26,14 @@ function displayUserMessage(message, isImage = false) {
   if (isImage) {
       let img = document.createElement("img");
       img.src = message;
-      img.style.maxWidth = "150px";
-      img.style.borderRadius = "10px";
-      img.style.display = "block";
+      img.alt = "User Image";
       userContent.appendChild(img);
   } else {
       userContent.innerText = message;
   }
 
-  userMessage.appendChild(userAvatar);
   userMessage.appendChild(userContent);
+  userMessage.appendChild(userAvatar); // Place avatar at right for user messages
   chat.appendChild(userMessage);
   chat.scrollTop = chat.scrollHeight;
 }
@@ -129,11 +126,14 @@ imageInput.addEventListener("change", function () {
   const file = this.files[0];
 
   if (file) {
+
+
       const formData = new FormData();
       formData.append("file", file);
 
       // Display a local preview instantly
       const localURL = URL.createObjectURL(file);
+      
       displayUserMessage(localURL, true);
 
       // Send image to the backend
@@ -146,14 +146,9 @@ imageInput.addEventListener("change", function () {
           modal.style.display = "none";
           document.body.classList.remove("modal-open");
 
-          // Replace local preview with backend URL
-          const chatMessages = document.querySelectorAll(".message.user img");
-          const lastImage = chatMessages[chatMessages.length - 1];
-          lastImage.src = data.url; // Update image source with server URL
-
           // Bot response
           setTimeout(() => {
-              displayBotMessage("Image uploaded successfully! Here's the link: " + data.url);
+              displayBotMessage("Image uploaded successfully!");
           }, 1000);
       })
       .catch(error => {
@@ -182,7 +177,7 @@ function typeEffect(element, text, speed = 50) {
 // Initialize bot welcome message on page load
 document.addEventListener("DOMContentLoaded", function () {
   const botTextElement = document.getElementById("bot-text");
-  const message = `Welcome to Epibot! 🤖 Upload an image and I'll analyze it. Let's get started!`;
+  const message = `Welcome to Epibot! 🤖 Upload an image and I'll analyze it. Let's get started!\nUpload your image first.`;
   typeEffect(botTextElement, message, 30);
 
 });
